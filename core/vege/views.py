@@ -17,4 +17,14 @@ def recipes(request):
         
         return redirect('/recipe/')
 
-    return render(request,"recipe.html")
+    queryset = recipe.objects.all()
+    context = {'recipes' : queryset}
+
+
+    return render(request,"recipe.html",context)
+
+
+def delete_recipe(request,id):
+    queryset = recipe.objects.get(id=id) #Getting Dynamically Id
+    queryset.delete()
+    return redirect('/recipe/')
