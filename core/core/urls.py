@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from basic.views import *
+from vege.views import *
 
 urlpatterns = [
     path("" , hello , name='hello'),
+    path("recipe/", recipes ,name="recipe"),
     path("about/" , about , name='about'),
     path("contact/" , contact , name='contact'),
 
