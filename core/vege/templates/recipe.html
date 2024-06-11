@@ -31,6 +31,23 @@
             <button type="submit" class="btn btn-success">Add Recipe</button>
           </form>
 
+          <hr>
+          <div class="mt-5">
+            <div class="mx-auto col-6">
+
+              <form>
+              <div class="mb-3">
+                <label for="search" class="form-label">Search Recipe</label>
+                <input name="search" type="text" class="form-control">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Search</button>
+
+            </form>
+            </div>
+          </div>
+
+
           <br><br><br><br>
 
           <table class="table">
@@ -41,6 +58,7 @@
                 <th scope="col">Recipes Description</th>
                 <th scope="col">Recipes Image</th>
                 <th scope="col">Actions</th>
+                <th scope="col">Update</th>
               </tr>
             </thead>
             <tbody>
@@ -53,9 +71,12 @@
                   <img  src="/media/{{recipe.image}}" style="height: 200px; width: 200px;"></td>
                   
                 <td>
-                  <a href="/delete-recipe/{{ recipe.id }}/" class="btn btn-danger">Delete</a>
+                  <a href="/delete-recipe/{{ recipe.id }}/" class="btn btn-danger m-2">Delete</a>
                 </td>
                 
+                <td>
+                  <a href="/update-recipe/{{ recipe.id }}/" class="btn btn-success m-2">Update</a>
+                </td>
                 </tr>
               {% endfor %}
             </tbody>

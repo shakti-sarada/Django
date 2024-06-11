@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+  table,th,td{
+      border: 1px solid black;
+  } 
+</style>
+
+    <div class="container mt-5">
+
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <hr>
+
+            {% if messages %}
+            {{ messages.tags }}
+            <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+            </div>
+            {% endif %}
+            
+            <form>
+            <div class="mb-3">
+              <label for="Username" class="form-label">Username</label>
+              <input name="Username" required type="text" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label for="Password" class="form-label">Password</label>
+              <input name="Password" required type="password" class="form-control">
+            </div>
+
+            <p> Don't have an account? <a href="/register/">Register</a></p>
+
+            <button type="submit" class="btn btn-success">Login</button>
+            </form>
+
+            </form>
+            </div>
+    
+{% endblock %}
