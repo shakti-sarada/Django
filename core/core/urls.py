@@ -33,6 +33,7 @@ urlpatterns = [
     path("register/" , register_page , name='register_page'),
     path("logout/" , logout_page , name='logout_page'),
     path("students/" , get_students , name='get_students'),
+    path("check_students_marks/<student_id>" , see_marks , name='see_marks'),
 
 
     path("admin/", admin.site.urls),

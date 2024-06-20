@@ -59,3 +59,13 @@ class SubjectMarks(models.Model):
     class Meta:
         unique_together = ['student','subject']
         ordering = ['student']
+
+
+class ReportCard(models.Model):
+    student = models.ForeignKey(Student, related_name="studentreportcard", on_delete=models.CASCADE)
+    student_rank = models.IntegerField()
+    creation_date = models.DateField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['student_rank','creation_date']
+

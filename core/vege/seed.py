@@ -2,6 +2,7 @@ from faker import Faker
 fake = Faker()
 import random
 from .models import *
+from django.db.models import Sum
 
 def create_subjects_marks(n):
     try:
@@ -43,3 +44,32 @@ def seed_db(n=50) ->None:
             )
     except Exception as e:
         print(e)
+
+
+from django.db import IntegrityError
+from datetime import datetime
+from .models import Student, ReportCard
+
+def generate_report_card():
+    ranks = Student.objects.annotate(marks=Sum('studentmarks__marks')).order_by('-marks', '-student_age') #Annotate Marks and Order by Marks and Age:
+    i = 1
+    creation_date = datetime.now().date()  # Ensuring a unique creation date for each invocation
+
+ 
+# Check for Existing Records and Handle Exceptions:
+    for rank in ranks:
+        try:
+            # Check if a record with the same student_rank and creation_date already exists
+            if not ReportCard.objects.filter(student_rank=i, creation_date=creation_date).exists():
+                ReportCard.objects.create(
+                    student=rank,
+                    student_rank=i,
+                    creation_date=creation_date
+                )
+            else:
+                print(f"Record with student_rank={i} and creation_date={creation_date} already exists.")
+            
+        except IntegrityError as e:
+            print(f"IntegrityError: {e}")
+        
+        i += 1  # Increment the rank
