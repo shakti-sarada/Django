@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'basic2.CustomUser'
+
 
 # Application definition
 
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
 EXTERNAL_APPS=[
     "basic",
     "vege",
+    "basic2",
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS

@@ -1,11 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from .utils import generate_slug
+
+User = get_user_model()
+
+class StudentsManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().filter(is_deleted = False)
 
 class recipe(models.Model):
     user = models.ForeignKey(User , on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to="recipe")
+    slug = models.SlugField(unique=True)
+    
+
+    
+
+    def save(self, *args, **kwargs):
+        self.slug = generate_slug(self.name)
+        super(recipe, self).save(*args,**kwargs) 
 
 
 class Department(models.Model):
@@ -40,6 +55,10 @@ class Student(models.Model):
     student_email = models.EmailField(unique=True)
     student_age = models.IntegerField(default=18)
     student_address = models.TextField()
+    is_deleted = models.BooleanField(default=False)
+
+    objects = StudentsManager()
+    admin_objects = models.Manager()
 
     def __str__(self) -> str:
         return self.student_name

@@ -2,7 +2,10 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
+from vege.seed import *
+
 def hello(request):
+    seed_db(300)
 
     peoples=[
         {'name':'Shakti','age':22},

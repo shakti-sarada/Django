@@ -7,6 +7,9 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q,Sum
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 @login_required(login_url="/login/")
@@ -41,8 +44,8 @@ def delete_recipe(request,id):
     queryset.delete()
     return redirect('/recipe/')
 
-def update_recipe(request,id):
-    queryset = recipe.objects.get(id=id) #Getting Dynamically Id
+def update_recipe(request,slug):
+    queryset = recipe.objects.get(slug=slug) #Getting Dynamically Id
 
     if request.method=="POST":
         data =request.POST
