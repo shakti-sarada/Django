@@ -10,22 +10,22 @@
 </head>
 <body>
 
-  <a href="/contact/">
-    Contact
-  </a>
+  <div class="container">
+    <h1 style="color: blue;">This is index page.</h1>
+    <br>
+    
+    <a href="{% url 'send_email' %}" class="btn btn-success">Send Email</a>
 
-  |
 
-<a href="/about/">
-    About
-  </a>
+  </div>
 
   
-    <h1 style="color: red;">Hello Shakti. This is index page.</h1>
-    <hr>
+
+  
+    
 
     
-    <table class="container" >
+    <table class="container mt-5" >
         <tr >
           <th >S.No</th>
           <th>Name</th>
