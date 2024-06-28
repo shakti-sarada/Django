@@ -1,14 +1,21 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from vege.seed import *
-from .utils import send_email_to_client
+from .utils import send_emai_with_attachment
+from .models import Car
 
 
 def send_email(request):
-    send_email_to_client()
+    subject = "Test Email"
+    message = "Django server email test."
+    recipient_list = ["shaktisahoo65@gmail.com"]
+    file_path = r"C:\Users\dell\Downloads\sushi.jpg"
+    send_emai_with_attachment(subject,message,recipient_list,file_path)
     return redirect('/')
 
 def hello(request):
+
+    Car.objects.create(name = f"Supra-{random.randint(0,100)}")
 
     peoples=[
         {'name':'Shakti','age':22},

@@ -1,5 +1,7 @@
 from typing import Any
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 #Create
 class Student(models.Model):
@@ -16,3 +18,8 @@ class Car(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+@receiver(post_save, sender = Car)
+def call_car_api(sender, instance, **kwargs):
+    print("Car Object Created.")
+    print(sender, instance, kwargs)
